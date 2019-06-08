@@ -1,0 +1,63 @@
+<div class="container rtl">
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">مدیریت فاکتور ها</h4>
+    <p>شما در این بخش می توانید برای خدماتی که ارائه می دهید یک پیش فاکتور ایجاد کنید</p>
+    <a href="<%= Routes.invoice_path(@conn, :new_invoice) %>" class="float-left">
+     <button type="button" class="btn btn-outline-success">ساخت فاکتور</button>
+   </a>
+   <br>
+   <br>
+    <hr>
+    <p class="mb-0">توجه نمایید در هر زمانی که نیاز باشد می توانید وضعیت سفارش را تغییر دهید کافیست آن را ویرایش کنید.</p>
+  </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">نام و نام خانوداگی</th>
+      <th scope="col">برند</th>
+      <th scope="col">دستگاه</th>
+      <th scope="col">وضعیت</th>
+      <th scope="col">ساخت</th>
+      <th scope="col">به روز رسانی</th>
+      <th scope="col">عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for {item, color} <- Enum.zip(@invoices, Stream.cycle(["active", "unactive"])) do %>
+  <%= if color != "active" do %>
+    <tr>
+  <% else %>
+    <tr class="table-active">
+  <% end %>
+    <td>
+      <a href="<%= Routes.invoice_path(@conn, :edit_invoice, item.id) %>"><%= item.name %> <%= item.last_name %></a>
+    </td>
+    <td>
+      <%= item.brand_name %>
+    </td>
+    <td>
+      <%= item.devices_name %>
+    </td>
+    <td>
+
+      <%= item.invoice_status_name %>
+    </td>
+    <td>
+      <% %{day_number: day_number, month_name: month_name, year_number: year_number} = Household.Extera.CalendarConverter.jalali_create(item.inserted_at) %>
+      <%= day_number %> <%= month_name %> <%= year_number %>
+    </td>
+    <td>
+      <% %{day_number: upday_number, month_name: upmonth_name, year_number: upyear_number} = Household.Extera.CalendarConverter.jalali_create(item.updated_at) %>
+      <%= upday_number %> <%= upmonth_name %> <%= upyear_number %>
+    </td>
+    <td><%= link "حذف", to: Routes.invoice_path(@conn, :delete_invoice, item.id), method: :delete, data: [confirm: "آیا مطمئن هستید؟"] %></td>
+  </tr>
+<% end %>
+
+  </tbody>
+</table>
+
+<%= render HouseholdWeb.LayoutView, "_pagination.html", conn: @conn, page_number: @page_number, end_of_page: @total_pages %>
+
+</div>

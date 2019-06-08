@@ -1,0 +1,82 @@
+<div class="container rtl">
+  <%= form_for @changeset, Routes.invoice_path(@conn, :update_invoice), fn f -> %>
+    <div class="form-group">
+      <div class="form-group col-md">
+        <label for="">نام مشتری</label>
+        <%= text_input f, :name, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :name %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">نام خانوادگی مشتری</label>
+        <%= text_input f, :last_name, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :last_name %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب برند</label>
+        <%= select f, :brand_id, @brands, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :brand_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب دستگاه</label>
+        <%= select f, :device_id, @divices, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :device_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب وضعیت تحویل</label>
+        <%= select f, :invoice_status_id, @invoice_statuses, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :invoice_status_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">مبلغ دریافتی</label>
+        <%= text_input f, :price, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :price %></small>
+      </div>
+
+
+      <div class="form-group col-md">
+        <label for="">شماره موبایل</label>
+        <%= text_input f, :mobile, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :mobile %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">توضیحات</label>
+        <%= textarea f, :description,  class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :description %></small>
+      </div>
+
+
+      <div class="form-group col-md">
+        <label for="">شماره فاکتور</label>
+        <%= text_input f, :code, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :code %></small>
+      </div>
+
+
+
+
+
+      <div class="form-group col-md">
+        <label for="">تاریخ تحویل به مشتری</label>
+        <%= text_input f, :persian_delivery_time, value: f.data.delivery_time, class: "form-control datetimepersian" %>
+        <%= error_tag f, :persian_delivery_time %>
+        <small id="" class="form-text text-muted"> تاریخ و ساعت دقیق: <b><span class="realtime"><%= Household.Extera.CalendarConverter.miladi_to_jalaali(f.data.delivery_time) %></span></b></small>
+      </div>
+
+
+      <%= hidden_input(f, :id) %>
+      <%= submit "ذخیره", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<%
+  # {:ok, jalaali_datetime} = DateTime.convert(f.data.delivery_time, Jalaali.Calendar)
+  # final_jalaali_output = jalaali_datetime |> DateTime.to_string() |> String.replace("Z", "")
+  # IO.inspect(final_jalaali_output)
+%>

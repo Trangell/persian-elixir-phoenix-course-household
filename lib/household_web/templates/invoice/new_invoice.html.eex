@@ -1,0 +1,67 @@
+<div class="container rtl">
+  <%= form_for @changeset, Routes.invoice_path(@conn, :add_invoice), fn f -> %>
+    <div class="form-group">
+
+      <div class="form-group col-md">
+        <label for="">نام مشتری</label>
+        <%= text_input f, :name, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :name %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">نام خانوادگی مشتری</label>
+        <%= text_input f, :last_name, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :last_name %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب برند</label>
+        <%= select f, :brand_id, @brands, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :brand_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب دستگاه</label>
+        <%= select f, :device_id, @divices, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :device_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">انتخاب وضعیت تحویل</label>
+        <%= select f, :invoice_status_id, @invoice_statuses, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :invoice_status_id %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">مبلغ دریافتی</label>
+        <%= text_input f, :price, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :price %></small>
+      </div>
+
+
+      <div class="form-group col-md">
+        <label for="">شماره موبایل</label>
+        <%= text_input f, :mobile, class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :mobile %></small>
+      </div>
+
+      <div class="form-group col-md">
+        <label for="">توضیحات</label>
+        <%= textarea f, :description,  class: "form-control" %>
+        <small id="" class="form-text text-muted"><%= error_tag f, :description %></small>
+      </div>
+
+
+      
+
+      <div class="form-group col-md">
+        <label for="">تاریخ تحویل به مشتری</label>
+        <%= text_input f, :persian_delivery_time, class: "form-control datetimepersian" %>
+        <%= error_tag f, :persian_delivery_time %>
+      </div>
+
+
+      <%= submit "ذخیره", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,14 @@
+<div class="container rtl">
+  <%= form_for @changeset, Routes.service_path(@conn, :add_divice), fn f -> %>
+    <div class="form-group">
+      <br>
+      <label>نام دستگاه:</label>
+      <br>
+      <%= text_input f, :name, class: "form-control" %>
+      <br>
+      <small id="emailHelp" class="form-text text-muted"><%= error_tag f, :name %></small>
+      <br>
+      <%= submit "ذخیره", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

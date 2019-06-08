@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Household · Phoenix Framework</title>
+    <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script src="http://localhost:4000/js/jquery.min.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/js/persian-date.min.js"></script>
+    <script type="text/javascript" src="http://localhost:4000/js/persian-datepicker.min.js"></script>
+    <link rel="stylesheet" href="http://localhost:4000/js/persian-datepicker.min.css"/>
+    <% IO.inspect Phoenix.Controller.action_name(@conn) %>
+  </head>
+  <body>
+    <main role="main" class="container">
+      <br>
+      <br>
+      <div class="container rtl">
+        <%= if get_flash(@conn, :success) != nil do %>
+          <div class="alert alert-primary rtl" role="alert"><%= get_flash(@conn, :success) %></div>
+        <% end %>
+
+        <%= if get_flash(@conn, :danger) != nil do %>
+          <div class="alert alert-danger rtl" role="alert"><%= get_flash(@conn, :danger) %></div>
+        <% end %>
+
+        <!-- menu -->
+        <a href="<%= Routes.dashboard_path(@conn, :dashboard) %>">
+          <button type="button" class="btn btn-outline-info">داشبورد</button>
+        </a>
+        <a href="<%= Routes.service_path(@conn, :brands) %>">
+          <button type="button" class="btn btn-outline-primary">مدیریت برند</button>
+        </a>
+
+        <a href="<%= Routes.service_path(@conn, :divices) %>">
+          <button type="button" class="btn btn-outline-secondary">مدیریت دستگاه</button>
+        </a>
+
+        <a href="<%= Routes.service_path(@conn, :invoice_statuses) %>">
+          <button type="button" class="btn btn-outline-warning">وضعیت فاکتور ها</button>
+        </a>
+
+        <a href="<%= Routes.invoice_path(@conn, :invoices) %>">
+          <button type="button" class="btn btn-outline-danger">پیش فاکتور</button>
+        </a>
+
+        <!-- <button type="button" class="btn btn-outline-danger">Danger</button>
+        <button type="button" class="btn btn-outline-warning">Warning</button>
+
+        <button type="button" class="btn btn-outline-dark">Dark</button> -->
+        <br>
+        <br>
+      </div>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <br>
+    <br>
+    <footer class="container rtl">
+      <p class="cright">طراحی و ساخت: <a href="https://trangell.com">ترانگل</a></p>
+    </footer>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.datetimepersian').persianDatepicker({
+            observer: true,
+            format: 'YYYY-MM-DD HH:mm:ss',
+            persianDigit: false,
+            // "1398-05-21 10:03:04"
+            altField: '.observer-example-alt',
+            calendar:{
+                persian: {
+                    locale: 'en',
+                    // leapYearMode: 'astronomical'
+                }
+            },
+            toolbox:{
+                calendarSwitch:{
+                    enabled: false
+                }
+            },
+            timePicker: {
+                enabled: true,
+                meridiem: {
+                    enabled: true
+                }
+            }
+        });
+      });
+    </script>
+
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+  </body>
+</html>

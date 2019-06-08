@@ -1,0 +1,46 @@
+/* This file is for your main application css. */
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+@font-face {
+	font-family: Vazir;
+	font-style: normal;
+	font-weight: normal;
+	src: url('/fonts/Vazir.eot');
+	src: url('/fonts/Vazir.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+		 url('/fonts/Vazir.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+		 url('/fonts/Vazir.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+		 url('/fonts/Vazir.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Vazir-Thin;
+    src: url('/fonts/Vazir-Thin.eot');
+  	src: url('/fonts/Vazir-Thin.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+  		 url('/fonts/Vazir-Thin.woff2') format('woff2'),  /* FF39+,Chrome36+, Opera24+*/
+  		 url('/fonts/Vazir-Thin.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+  		 url('/fonts/Vazir-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: justify;
+  font-family: Vazir-Thin;
+}
+
+a {
+  font-family: Vazir-Thin;
+}
+.cright {
+  text-align: center;
+  margin: 0 auto;
+}
+input.datetimepersian {
+  direction: ltr !important;
+}
+
+.realtime {
+  direction: ltr !important;
+  text-align: justify;
+}

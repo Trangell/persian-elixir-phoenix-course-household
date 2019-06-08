@@ -1,0 +1,45 @@
+<div class="container rtl">
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">مدیریت دستگاها</h4>
+    <p>در این بخش می توانید دستگاهایی که دریافت می کنید را ایجاد نمایید تا در بخش فاکتور از آن استفاده نمایید.</p>
+    <a href="<%= Routes.service_path(@conn, :new_divice) %>" class="float-left">
+     <button type="button" class="btn btn-outline-success">ساخت دستگاه</button>
+   </a>
+   <br>
+   <br>
+    <hr>
+    <p class="mb-0">برای ایجاد یک دستگاه روی دکمه ایجاد کلیک کنید</p>
+  </div>
+
+<!-- inserted_at, updated_at -->
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">نام دستگاه</th>
+      <th scope="col">ساخت</th>
+      <th scope="col">به روز رسانی</th>
+      <th scope="col">عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for {item, color} <- Enum.zip(@divices, Stream.cycle(["active", "unactive"])) do %>
+  <%= if color != "active" do %>
+    <tr>
+  <% else %>
+    <tr class="table-active">
+  <% end %>
+    <td>
+      <a href="<%= Routes.service_path(@conn, :edit_divice, item.id) %>"><%= item.name %></a>
+    </td>
+    <td><%= item.inserted_at %></td>
+    <td><%= item.updated_at %></td>
+    <td><%= link "حذف", to: Routes.service_path(@conn, :delete_divice, item.id), method: :delete, data: [confirm: "آیا مطمئن هستید؟"] %></td>
+  </tr>
+<% end %>
+
+  </tbody>
+</table>
+
+
+
+</div>

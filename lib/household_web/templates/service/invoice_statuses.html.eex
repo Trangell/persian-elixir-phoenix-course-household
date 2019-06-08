@@ -1,0 +1,44 @@
+<div class="container rtl">
+  <div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">مدیریت برند ها</h4>
+    <p>شما در این بخش می توانید وضعیت هایی که نیاز دارید را بسازید تا در ساخت پیش فاکتور از آن استفاده نمایید.</p>
+    <a href="<%= Routes.service_path(@conn, :new_invoice_status) %>" class="float-left">
+     <button type="button" class="btn btn-outline-success">ساخت وضعیت</button>
+   </a>
+   <br>
+   <br>
+    <hr>
+    <p class="mb-0">برای ایجاد وضعیت روی دکمه ساخت برند کلیک کنید</p>
+  </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">وضعیت</th>
+      <th scope="col">ساخت</th>
+      <th scope="col">به روز رسانی</th>
+      <th scope="col">عملیات</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for {item, color} <- Enum.zip(@invoice_statuses, Stream.cycle(["active", "unactive"])) do %>
+  <%= if color != "active" do %>
+    <tr>
+  <% else %>
+    <tr class="table-active">
+  <% end %>
+    <td>
+      <a href="<%= Routes.service_path(@conn, :edit_brand, item.id) %>"><%= item.name %></a>
+    </td>
+    <td><%= item.inserted_at %></td>
+    <td><%= item.updated_at %></td>
+    <td><%= link "حذف", to: Routes.service_path(@conn, :delete_invoice_status, item.id), method: :delete, data: [confirm: "آیا مطمئن هستید؟"] %></td>
+  </tr>
+<% end %>
+
+  </tbody>
+</table>
+
+
+
+</div>
